@@ -1,3 +1,4 @@
+#!bin/bash 
 echo "Welcome To Employee Wage Compution"
 
 isPresent=1
