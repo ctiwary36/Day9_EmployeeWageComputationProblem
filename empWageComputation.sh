@@ -1,49 +1,55 @@
   
-#!/bin/bash -x
-
-echo "Welcome To Employee Wage Compution"
+echo $"Welocome to emp wage program"
 
 isPresent=1
 
 randomNumber=$((RANDOM%2))
-
 if [ $randomNumber -eq 	$isPresent ]
 then
 	echo "Employee Present"
-	read -p "please enter 0 or 1:" caseChoice
+	echo "Enter choice: "
+	echo "1.Daily Employee"
+	echo "2.Part Time Employee"
+	read ch
+case "$ch" in
+	1) echo "To calculate Daily Employee Wage"
 
-case "$caseChoice" in
-	0) echo "Daily Employee Wage"
-
-		function calculateDailyEmployeeWage(){
+		
+		function calculateDailyEmployeeWageWorkHours(){
 		read -p "Assume Wage per hour is :" isWagePerHour "rupees"
 		isDayHour=8
 
+		
 		calculateEmployeeWageForOneDay=$(( $isWagePerHour * $isDayHour ))
 		read -p "working days :" isDay
+		
 		calculateEmployeeWageForMonth=$(( $calculateEmployeeWageForOneDay  *  $isDay ))
-		echo "employee wages for a Month :" $calculateEmployeeWageForMonth "rupees"
+		echo "To calculate employee wages for a Month :" $calculateEmployeeWageForMonth "rupees"
 		}
-		calculateDailyEmployeeWage
+		
+		calculateDailyEmployeeWageWorkHours
 		;;
-	1)echo "part time Employee and wage"
+	2)echo "To calculate part time Employee and wage"
 
-		function partTimeEmployeeAndWage(){
+		
+		function partTimeEmployeeAndWageWorkHours(){
 		read -p "Assume Wage per hour is :" isWagePerHour "rupees"
 		isDayHour=8
 
+		
 		calculateEmployeeWageForOneDay=$(( $isWagePerHour * $isDayHour ))
-		read -p "part time working days :" isDay
+		read -p "TO part time working days :" isDay
 
+		
 		calculateEmployeeWageForMonth=$(( $calculateEmployeeWageForOneDay * $isDay ))
 		echo "To calculate employee part time wages for a Month :" $calculateEmployeeWageForMonth "rupees"
 		}
-		partTimeEmployeeAndWage
+		partTimeEmployeeAndWageWorkHours
 		;;
-		*)echo "plese enter 1 or 0"
+		*)echo "No choice."
 		;;
 esac
 
 else
-   echo "Employee Absent"
+   echo "Employee Absent."
  fi
