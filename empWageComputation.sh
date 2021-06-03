@@ -1,41 +1,42 @@
-#!bin/bash 
+#!/bin/bash 
+
 echo "Welcome To Employee Wage Compution"
 
-isPresent=1
+WAGE_PER_HOUR=20
+IS_FULL_TIME=2
+IS_PART_TIME=1
+EMPLOYEE_HOUR_FULLTIME=8
+EMPLOYEE_HOUR_PARTTIME=4
+read -p "number of working day :" NUMBER_OF_WORKING_DAYS
+read -p "number of working hours :" NUMBER_OF_WORKING_HOURS
 
-randomNumber=$((RANDOM%2))
 
-if [ $randomNumber -eq 	$isPresent ]
-then
+totalSalary=0
+totalEmployeeHours=0
+totalWorkingDays=0
 
-	echo "Employee Present"
-echo "please enter  0 for full time  employee or enter 1 for Part time employee"
-read caseChoce
+while [[ $totalEmployeeHours -lt $NUMBER_OF_WORKING_HOURS &&
+			$totalWorkingDays -lt $NUMBER_OF_WORKING_DAYS ]]
+do
+	((totalWorkingDays++))
+	randomShiftCheck=$((RANDOM%3))
+	case $randomShiftCheck in
 
-case "$caseChoce" in
-	0) echo "Daily Employee Wage"
-		
-		function calculateDailyEmployeeWae(){
-		read -p "Assume Wage per hour is :" isWagePerHour "rupees"
-		read -p "full day hours is :" isFullDayHour "hours"
-		calculateEmployeeWage=$(( $isWagePerHour*$isFullDayHour ))
-		echo "daily employee wage :" $calculateEmployeeWage "rupees"
-		}
-		calculateDailyEmployeeWae
-		;;
-	1)echo "part time Employee wage"
-		function partTimeEmployeeAndWage(){
-		read -p "Assume Wage per hour is :" isWagePerHour "rupees"
-		read -p "Part time hour is :" isPartTimeDayHour "hours"
-		calculatePartTimeEmployeeWage=$(( $isWagePerHour * $isPartTimeDayHour ))
-		echo "Part time employee wage :" $calculatePartTimeEmployeeWage "rupees"
-			}
-		partTimeEmployeeAndWage
-		;;
-		*)echo "Please enter 1 or 2"
-		;;
-esac
+		$IS_FULL_TIME )
+			employeeHour=$((EMPLOYEE_HOUR_FULLTIME))
+			;;
+		$IS_PART_TIME )
+			employeeHour=$((EMPLOYEE_HOUR_PARTTIME))
+			;;
+		* )
+			employeeHour=0
+			;;
+	esac
+	totalEmployeeHours=$(($totalEmployeeHours+$employeeHour))
+	echo "total employee hours :" $totalEmployeeHours	
+done
 
-else
-   echo "Employee Absent"
- fi
+
+totalWorkingWage=$(($totalEmployeeHours*$WAGE_PER_HOUR))
+
+echo "Total working wage:" $totalWorkingWage
