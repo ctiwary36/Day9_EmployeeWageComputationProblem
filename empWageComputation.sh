@@ -1,8 +1,4 @@
-
-#!/bin/bash -x
-
 echo "Welcome To Employee Wage Compution"
-
 
 isPresent=1
 
@@ -11,25 +7,34 @@ randomNumber=$((RANDOM%2))
 if [ $randomNumber -eq 	$isPresent ]
 then
 
-function calculateDailyEmployeeWage(){
-        read -p "Assume Wage per hour is :" isWagePerHour "rupees"
-        read -p "full day hours is :" isFullDayHour
-        calculateEmployeeWage=$(( $isWagePerHour*$isFullDayHour ))
-        echo "daily employee wage :" $calculateEmployeeWage "rupees"
-}
-
 	echo "Employee Present"
-function partTimeEmployeeAndWage(){
-	read -p "Assume Wage per hour is :" isWagePerHour "rupees"
-	read -p "part time hour is :" isPartTimeDayHour "Hours"
-	calculatePartTimeEmployeeWage=$(( $isWagePerHour*$isPartTimeDayHour ))
-	echo "Part time employee wage :" $calculatePartTimeEmployeeWage "rupees"
-}
+echo "please enter  0 for full time  employee or enter 1 for Part time employee"
+read caseChoce
 
-calculateDailyEmployeeWage
+case "$caseChoce" in
+	0) echo "Daily Employee Wage"
+		
+		function calculateDailyEmployeeWae(){
+		read -p "Assume Wage per hour is :" isWagePerHour "rupees"
+		read -p "full day hours is :" isFullDayHour "hours"
+		calculateEmployeeWage=$(( $isWagePerHour*$isFullDayHour ))
+		echo "daily employee wage :" $calculateEmployeeWage "rupees"
+		}
+		calculateDailyEmployeeWae
+		;;
+	1)echo "part time Employee wage"
+		function partTimeEmployeeAndWage(){
+		read -p "Assume Wage per hour is :" isWagePerHour "rupees"
+		read -p "Part time hour is :" isPartTimeDayHour "hours"
+		calculatePartTimeEmployeeWage=$(( $isWagePerHour * $isPartTimeDayHour ))
+		echo "Part time employee wage :" $calculatePartTimeEmployeeWage "rupees"
+			}
+		partTimeEmployeeAndWage
+		;;
+		*)echo "Please enter 1 or 2"
+		;;
+esac
 
-partTimeEmployeeAndWage
 else
    echo "Employee Absent"
  fi
-
